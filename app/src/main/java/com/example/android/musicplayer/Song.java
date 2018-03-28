@@ -28,25 +28,18 @@ public class Song {
     private int mSongResourceId;
 
     /**
-     * Play button for each song
-     */
-    private int mPlayButtonId;
-
-    /**
      * Create a new Song object.
      *
      * @param songName       is the song name
      * @param artistName     is the artist name who sing this song
      * @param albumName      is the album name from where is this song
      * @param songResourceId is the resource id for audio of this song
-     *                       @param playButtonId is the resource for play / pause button for each song
      */
-    public Song(String songName, String artistName, String albumName, int songResourceId, int playButtonId) {
+    public Song(String songName, String artistName, String albumName, int songResourceId) {
         mSongName = songName;
         mArtistName = artistName;
         mAlbumName = albumName;
         mSongResourceId = songResourceId;
-        mPlayButtonId = playButtonId;
     }
 
     /**
@@ -75,12 +68,5 @@ public class Song {
      */
     public int getSongResourceId() {
         return mSongResourceId;
-    }
-
-    /**
-     * Return the image of play button for each song.
-     */
-    public int getPlayButtonId() {
-        return mPlayButtonId;
     }
 }

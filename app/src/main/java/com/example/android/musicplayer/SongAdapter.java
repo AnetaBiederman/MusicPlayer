@@ -58,10 +58,6 @@ public class SongAdapter extends ArrayAdapter<Song> {
         // the Artist TextView.
         albumTextView.setText(currentSong.getAlbumName());
 
-        // Find the ImageView in the list_item.xml layout with the ID image.
-        ImageView play_pause = (ImageView) listItemView.findViewById(R.id.play_button);
-        play_pause.setImageResource(currentSong.getPlayButtonId());
-
         // Return the whole list item layout (containing 3 TextViews) so that it can be shown in
         // the ListView.
         return listItemView;

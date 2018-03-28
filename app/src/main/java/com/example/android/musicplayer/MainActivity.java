@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
      * Handles audio focus when playing a sound file
      */
     private AudioManager mAudioManager;
+
 
     /**
      * This listener gets triggered whenever the audio focus changes
@@ -69,6 +72,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Switch activity to search activity
+        TextView search = (TextView) findViewById(R.id.search_category);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent searchIntent = new Intent(MainActivity.this, Search.class);
+                startActivity(searchIntent);
+            }
+        });
+
         // Intent to open Play music store
         RelativeLayout shop = (RelativeLayout) findViewById(R.id.shop_layout);
 
@@ -87,15 +100,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a list of songs
         final ArrayList<Song> songs = new ArrayList<Song>();
-        songs.add(new Song("one", "Barbora", "Love", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("two", "Barbora", "Love", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("three", "Barbora", "Love", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("four", "Oliver", "morning", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("five", "Oliver", "morning", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("six", "Oliver", "morning", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("seven", "Christi", "night", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("eight", "Christi", "night", R.raw.test, R.drawable.play_button));
-        songs.add(new Song("night", "Christi", "night", R.raw.test, R.drawable.play_button));
+        songs.add(new Song("one", "Barbora", "Love", R.raw.test));
+        songs.add(new Song("two", "Barbora", "Love", R.raw.test));
+        songs.add(new Song("three", "Barbora", "Love", R.raw.test));
+        songs.add(new Song("four", "Oliver", "morning", R.raw.test));
+        songs.add(new Song("five", "Oliver", "morning", R.raw.test));
+        songs.add(new Song("six", "Oliver", "morning", R.raw.test));
+        songs.add(new Song("seven", "Christi", "night", R.raw.test));
+        songs.add(new Song("eight", "Christi", "night", R.raw.test));
+        songs.add(new Song("night", "Christi", "night", R.raw.test));
 
 
         // Create an {@link SongAdapter}, whose data source is a list of {@link Song}s. The
@@ -123,28 +136,17 @@ public class MainActivity extends AppCompatActivity {
                     // Create and setup the {@link MediaPlayer} for the audio resource associated
                     // with the current word
                     mMediaPlayer = MediaPlayer.create(MainActivity.this, word.getSongResourceId());
-                    final ImageView play_pause = (ImageView) findViewById(R.id.play_button);
                     // Start the audio file
                     mMediaPlayer.start();
-                    play_pause.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (mMediaPlayer.isPlaying()){
-                                play_pause.setImageResource(R.drawable.pause_button);
-                                mMediaPlayer.pause();
-                            } else {
-                                mMediaPlayer.start();
-                                play_pause.setImageResource(R.drawable.play_button);
-                            }
-                        }
-                    });
-
-                    // Setup a listener on the media player, so that we can stop and release the
-                    // media player once the sound has finished playing.
-                    mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
+                ;
+
+                // Setup a listener on the media player, so that we can stop and release the
+                // media player once the sound has finished playing.
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
+
     }
 
     @Override
